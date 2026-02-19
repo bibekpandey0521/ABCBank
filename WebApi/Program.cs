@@ -1,4 +1,4 @@
-
+using Infrastructure;
 namespace WebApi
 {
     public class Program
@@ -11,7 +11,13 @@ namespace WebApi
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            //builder.Services.AddOpenApi();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDatabase(builder.Configuration);
+            builder.Services.AddRepositories();
 
             var app = builder.Build();
 
