@@ -10,4 +10,8 @@
     <None Include="Enums\TransactionType.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Responses\" />
+  </ItemGroup>
+
 </Project>

@@ -19,8 +19,8 @@ namespace Infrastructure
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services
-                .AddTransient(typeof(IReadRepositoryAsync<,>), typeof(IReadRepositoryAsync<,>))
-                .AddTransient(typeof(IWriteRepositoryAsync<,>), typeof(IWriteRepositoryAsync<,>))
+                .AddTransient(typeof(IReadRepositoryAsync<,>), typeof(ReadRepositoryAsync<,>))
+                .AddTransient(typeof(IWriteRepositoryAsync<,>), typeof(WriteRepositoryAsync<,>))
                 .AddTransient(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }
     }
