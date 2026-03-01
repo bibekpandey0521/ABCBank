@@ -1,4 +1,5 @@
 using Infrastructure;
+using Application;
 namespace WebApi
 {
     public class Program
@@ -18,13 +19,15 @@ namespace WebApi
 
             builder.Services.AddDatabase(builder.Configuration);
             builder.Services.AddRepositories();
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();

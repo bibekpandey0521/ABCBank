@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories
             {
                 _repositories = new Hashtable();
             }
-            var type = typeof(T).Name;
+            var type = $"{typeof(T).Name }_Read";
 
             if (!_repositories.ContainsKey(type))
             {
@@ -46,13 +46,13 @@ namespace Infrastructure.Repositories
             {
                 _repositories = new Hashtable();
             }
-            var type = typeof(T).Name;
+            var type = $"{typeof(T).Name }_Write";
 
             if (!_repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(WriteRepositoryAsync<,>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T),typeof(TId)),_context);
-
+                _repositories.Add(type, repositoryInstance);
             }
             return (IWriteRepositoryAsync<T, TId>)_repositories[type];
         }
