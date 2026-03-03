@@ -15,6 +15,8 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
+        public IQueryable<T> Entities => _context.Set<T>();
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
