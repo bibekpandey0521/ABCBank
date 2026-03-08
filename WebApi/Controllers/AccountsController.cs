@@ -23,6 +23,20 @@ namespace WebApi.Controllers
             return BadRequest(response);
         }
 
+        [HttpPost("transact")]
+        public async Task<IActionResult> TransactionAsync([FromBody] TransactionRequest transaction)
+        {
+            var response = await Sender.Send(new CreateTransactionCommand()
+            {
+                Transaction = transaction
+            });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
         [HttpGet("by-id/{id}")]
         public async Task<IActionResult> GetAccountByIdAsync(int id)
         {
