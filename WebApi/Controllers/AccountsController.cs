@@ -69,5 +69,15 @@ namespace WebApi.Controllers
             }
             return NotFound(response);
         }
+        [HttpGet("transactions/{accountId}")]
+        public async Task<IActionResult> GetAccountTransactionsAsync(int accountId)
+        {
+            var response = await Sender.Send(new GetAccountTransactionQuery() { AccountId = accountId });
+            if (response.IsSuccessful)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
     }
 }

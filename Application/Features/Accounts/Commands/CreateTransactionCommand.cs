@@ -76,7 +76,7 @@ namespace Application.Features.Accounts.Commands
 
             }
 
-            return new ResponseWrapper<int>().Failed(message: "Accounts Does Exists.");
+            return new ResponseWrapper<int>().Failed(message: "Accounts Does Not  Exists.");
         }
     }
 }
