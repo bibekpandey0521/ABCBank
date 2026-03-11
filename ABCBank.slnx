@@ -8,4 +8,7 @@
     <Project Path="Application/Application.csproj" />
     <Project Path="Domain/Domain.csproj" />
   </Folder>
+  <Folder Name="/src/UI/">
+    <Project Path="BankUI/BankUI.csproj" Id="793135d6-3f3b-41e2-a314-5d1758f91acf" />
+  </Folder>
 </Solution>
