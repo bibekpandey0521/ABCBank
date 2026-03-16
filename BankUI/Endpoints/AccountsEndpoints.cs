@@ -1,6 +1,6 @@
 ﻿namespace BankUI.Endpoints
 {
-    public static class AccountEndpoints
+    public static class AccountsEndpoints
     {
         public const string Add = "api/accounts/add";
         public const string Transact = "api/accounts/transact";

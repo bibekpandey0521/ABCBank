@@ -1,0 +1,24 @@
+﻿using Common.Wrapper;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace BankUI.Extensions
+{
+    internal static class ResponseExtensions
+    {
+        internal static async Task<ResponseWrapper<T>> ToResponseWrapper<T>(this HttpResponseMessage responseMessage)
+        {
+            var responseAsString = await responseMessage.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<ResponseWrapper<T>>(
+                responseAsString,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    ReferenceHandler = ReferenceHandler.Preserve
+                });
+
+            return result ?? throw new InvalidOperationException("Failed to deserialize response.");
+        }
+    }
+}
