@@ -1,35 +1,48 @@
-﻿using Common.Requests;
+﻿using BankUI.Endpoints;
+using BankUI.Extensions;
+using Common.Requests;
 using Common.Responses;
 using Common.Wrapper;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Http.Json;
 
 namespace BankUI.Services
 {
     public class AccountHolderService : IAccountHolderService
     {
-       
-        public Task<ResponseWrapper<int>> AddAccountHolderAsync(CreateAccountHolder createAccountHolder)
+        private readonly HttpClient _httpClient;
+        public AccountHolderService(HttpClient httpClient)
         {
-            throw new NotImplementedException();
+                _httpClient = httpClient;
+        }
+        public async Task<ResponseWrapper<int>> AddAccountHolderAsync(CreateAccountHolder createAccountHolder)
+        {
+            var response = await _httpClient.PostAsJsonAsync(AccountHoldersEndpoints.Add, createAccountHolder);
+            return await response.ToResponse<int>();
         }
 
-        public Task<ResponseWrapper<int>> DeleteAccountHolderAsync(int id)
+        public async Task<ResponseWrapper<int>> DeleteAccountHolderAsync(int id)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.DeleteAsync($"{AccountHoldersEndpoints.Delete}/{id}");
+            return await response.ToResponse<int>();
         }
 
-        public Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdResponse(int id)
+        public async Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdResponse(int id)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync(AccountHoldersEndpoints.GetById(id));
+            return await response.ToResponse<AccountHolderResponse>();
         }
 
-        public Task<ResponseWrapper<List<AccountHolderResponse>>> GetAllAccountHoldersAsync()
+        public async Task<ResponseWrapper<List<AccountHolderResponse>>> GetAllAccountHoldersAsync()
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync(AccountHoldersEndpoints.GetAll);
+            return await response.ToResponse<List<AccountHolderResponse>>();
         }
 
-        public Task<ResponseWrapper<int>> UpdateAccountHolderAsync(UpdateAccountHolder updateAccountHolder)
+        public async Task<ResponseWrapper<int>> UpdateAccountHolderAsync(UpdateAccountHolder updateAccountHolder)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.PutAsJsonAsync(AccountHoldersEndpoints.Update,updateAccountHolder);
+            return await response.ToResponse<int>();
         }
     }
 

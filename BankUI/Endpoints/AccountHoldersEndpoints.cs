@@ -1,8 +1,8 @@
 ﻿namespace BankUI.Endpoints
 {
-    public static class AccountHolderEndpoints
+    public static class AccountHoldersEndpoints
     {
-        public const string AddNew = "api/accountHolders/add";
+        public const string Add = "api/accountHolders/add";
         public const string Update = "api/accountHolders/update";
         public const string Delete = "api/accountHolders";
         public const string GetAll = "api/accountHolders/all";

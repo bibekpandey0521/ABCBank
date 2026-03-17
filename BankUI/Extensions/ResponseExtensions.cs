@@ -6,7 +6,7 @@ namespace BankUI.Extensions
 {
     internal static class ResponseExtensions
     {
-        internal static async Task<ResponseWrapper<T>> ToResponseWrapper<T>(this HttpResponseMessage responseMessage)
+        internal static async Task<ResponseWrapper<T>> ToResponse<T>(this HttpResponseMessage responseMessage)
         {
             var responseAsString = await responseMessage.Content.ReadAsStringAsync();
 
