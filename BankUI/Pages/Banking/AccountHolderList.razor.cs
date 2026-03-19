@@ -26,5 +26,11 @@ namespace BankUI.Pages.Banking
 
             _loading = false;
         }
+
+
+        private async Task AddAccuntHolderAsync()
+        {
+            await Console.Out.WriteLineAsync("Button Clicked");
+        }
     }
 }
