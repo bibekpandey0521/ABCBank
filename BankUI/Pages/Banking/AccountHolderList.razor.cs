@@ -19,7 +19,7 @@ namespace BankUI.Pages.Banking
             {
                 foreach (var message in response.Messages)
                 {
-                    _snackbar.Add(message,Severity.Error);
+                    _snackbar.Add(message, Severity.Error);
                 }
             }
 
@@ -30,7 +30,22 @@ namespace BankUI.Pages.Banking
 
         private async Task AddAccuntHolderAsync()
         {
-            await Console.Out.WriteLineAsync("Button Clicked");
+            var parameters = new DialogParameters();
+            var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Medium,
+                FullWidth = true,
+                BackdropClick = true
+            };
+            var dialog = await _dialogService.ShowAsync<AddAccountHolderDialog>("Add Account Holder", parameters, options);
+
+            var result = await dialog.Result;
+            if (!result.Canceled)
+            {
+                // Reload Account Holder List
+                await Console.Out.WriteLineAsync("All went well");
+            }
         }
     }
 }

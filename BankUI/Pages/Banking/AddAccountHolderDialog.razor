@@ -5,11 +5,28 @@
         </TitleContent>
         <DialogContent>
             <MudTextField @bind-Value="CreateAccountHolderRequest.FirstName"
-            Label="Outlined" Variant="Variant.Outlined"></MudTextField>
+                          Label="FirstName" Variant="Variant.Outlined"></MudTextField>
+            <MudTextField @bind-Value="CreateAccountHolderRequest.LastName"
+                          Label="LastName"
+                          Variant="Variant.Outlined">LastName</MudTextField>
+            <MudDatePicker @bind-Date="DateOfBirth"
+                           Label="Date Of Birth"
+                           Editable="true"
+                           Placeholder="Select Bob"></MudDatePicker>
+            <MudTextField @bind-Value="CreateAccountHolderRequest.ContactNumber"
+                          Label="ContactNumber"
+                          Variant="Variant.Outlined">
+                Contact Number
+            </MudTextField>
+            <MudTextField @bind-Value="CreateAccountHolderRequest.Email"
+                          Label="Email"
+                          Variant="Variant.Outlined">
+                Email
+            </MudTextField>
         </DialogContent>
         <DialogActions>
             <MudButton OnClick="Cancel">Cancel</MudButton>
-            <MudButton Color="Color.Primary" OnClick="SaveAsync">OK</MudButton>
+            <MudButton Color="Color.Primary" OnClick="SaveAsync">Save</MudButton>
         </DialogActions>
     </MudDialog>
 </MudForm>

@@ -8,18 +8,32 @@ namespace BankUI.Pages.Banking
     public partial class AddAccountHolderDialog
     {
 
-        [Parameter] public CreateAccountHolder CreateAccountHolderRequest { get; set; }
+        [Parameter] public CreateAccountHolder CreateAccountHolderRequest { get; set; } = new();
 
         [CascadingParameter]
         private IMudDialogInstance MudDialog { get; set; }
 
-        private void Submit() => MudDialog.Close(DialogResult.Ok(true));
-
         MudForm _form = default;
 
-        private async  Task SaveAsync()
+        public DateTime? DateOfBirth { get; set; }
+
+        private async Task SaveAsync()
         {
-            MudDialog.Close(DialogResult.Ok(true));
+            // Cast
+            CreateAccountHolderRequest.DateOfBirth = (DateTime)DateOfBirth;
+
+            var response = await _accountHolderService.AddAccountHolderAsync(CreateAccountHolderRequest);
+            if (response.IsSuccessful)
+            {
+                _snackbar.Add(response.Messages[0], Severity.Success);
+            }
+            else
+            {
+                foreach (var message in response.Messages)
+                {
+                    _snackbar.Add(message, Severity.Error);
+                }
+            }
         }
 
         void Cancel() => MudDialog.Cancel();
