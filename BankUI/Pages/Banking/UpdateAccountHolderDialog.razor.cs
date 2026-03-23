@@ -1,28 +1,25 @@
 using Common.Requests;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Runtime.CompilerServices;
 
 namespace BankUI.Pages.Banking
 {
-    public partial class AddAccountHolderDialog
+    public partial class UpdateAccountHolderDialog
     {
+        [Parameter] public UpdateAccountHolder UpdateAccountHolderRequest { get; set; } = new();
 
-        [Parameter] public CreateAccountHolder CreateAccountHolderRequest { get; set; } = new();
 
         [CascadingParameter]
         private IMudDialogInstance MudDialog { get; set; }
+
 
         MudForm _form = default;
 
         public DateTime? DateOfBirth { get; set; }
 
-        private async Task SaveAsync()
+        public async Task SaveAsync()
         {
-            // Cast
-            CreateAccountHolderRequest.DateOfBirth = (DateTime)DateOfBirth;
-
-            var response = await _accountHolderService.AddAccountHolderAsync(CreateAccountHolderRequest);
+            var response = await _accountHolderService.UpdateAccountHolderAsync(UpdateAccountHolderRequest);
             if (response.IsSuccessful)
             {
                 _snackbar.Add(response.Messages[0], Severity.Success);
@@ -30,9 +27,9 @@ namespace BankUI.Pages.Banking
             }
             else
             {
-                foreach (var message in response.Messages)
+                foreach(var message in response.Messages)
                 {
-                    _snackbar.Add(message, Severity.Error);
+                    _snackbar.Add(message,Severity.Error);
                 }
             }
         }

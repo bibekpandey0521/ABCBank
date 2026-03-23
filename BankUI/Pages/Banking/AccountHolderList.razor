@@ -6,7 +6,7 @@
             Color="Color.Primary" 
             StartIcon="@Icons.Material.Filled.Add" 
             Size="Size.Small" 
-                OnClick="(() =>  AddAccuntHolderAsync())" />
+                OnClick="(() =>  AddAccountHolderAsync())" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>FirstName</MudTh>
@@ -14,6 +14,7 @@
         <MudTh>DOB</MudTh>
         <MudTh>ContactNo</MudTh>
         <MudTh>Email</MudTh>
+        <MudTh>Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="FirstName">@context.FirstName</MudTd>
@@ -21,5 +22,11 @@
         <MudTd DataLabel="DOB">@context.DateOfBirth.ToString("dd MMMM yyyy")</MudTd>
         <MudTd DataLabel="ContactNo">@context.ContactNumber</MudTd>
         <MudTd DataLabel="Email">@context.Email</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudMenu Label="Manage" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary">
+                <MudMenuItem OnClick="(() => UpdateAccountHolderAsync(context.Id))">Update</MudMenuItem>
+                <MudMenuItem>Delete</MudMenuItem>
+            </MudMenu>
+        </MudTd>
     </RowTemplate>
 </MudTable>
