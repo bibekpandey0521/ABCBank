@@ -58,7 +58,7 @@ namespace BankUI.Pages.Banking
             var parameters = new DialogParameters();
             var accountHolder = AccountHolders.FirstOrDefault(accountHolder => accountHolder.Id == accountHolderId);
 
-            parameters.Add(nameof(UpdateAccountHolderDialog.UpdateAccountHolderRequest),new UpdateAccountHolder
+            parameters.Add(nameof(UpdateAccountHolderDialog.UpdateAccountHolderRequest), new UpdateAccountHolder
             {
                 Id = accountHolderId,
                 FirstName = accountHolder.FirstName,
@@ -74,12 +74,52 @@ namespace BankUI.Pages.Banking
                 FullWidth = true,
                 BackdropClick = false
             };
-            var dialog =  await _dialogService.ShowAsync<UpdateAccountHolderDialog>("Update Account Holder", parameters, options);
+            var dialog = await _dialogService.ShowAsync<UpdateAccountHolderDialog>("Update Account Holder", parameters, options);
 
             var result = await dialog.Result;
             if (!result.Canceled)
             {
                 await LoadAccountHoldersAsync();
+            }
+
+
+        }
+
+        private async Task DeleteAsync(int accountHolderId, string firstName, string lastName)
+        {
+            string message = $"Are you sure you want to delete {firstName} {lastName}?";
+            var parameters = new DialogParameters
+            {
+                { nameof(Shared.DeleteConfirmationDialog.Message), message },
+
+            };
+            var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true,
+                BackdropClick = false
+            };
+
+            var dialog = await _dialogService.ShowAsync<Shared.DeleteConfirmationDialog>("Delete",parameters,options);
+
+            var result = await dialog.Result;
+            if (!result.Canceled)
+            {
+                // Make a delete request
+                var response = await _accountHolderService.DeleteAccountHolderAsync(accountHolderId);
+                if (response.IsSuccessful)
+                {
+                    await LoadAccountHoldersAsync();
+                    _snackbar.Add(response.Messages[0], Severity.Success);
+                }
+                else
+                {
+                    foreach(var resmessage in response.Messages)
+                    {
+                        _snackbar.Add(resmessage, Severity.Error);
+                    }
+                }
             }
         }
     }

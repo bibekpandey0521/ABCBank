@@ -1,0 +1,15 @@
+﻿<MudDialog>
+    <TitleContent>
+        <MudText Type="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
+                Delete Confirmation
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@Message</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">No</MudButton>
+        <MudButton OnClick="Agreed" Color="Color.Error">Yes</MudButton>
+    </DialogActions>
+</MudDialog>
