@@ -17,14 +17,19 @@ namespace BankUI.Pages.Banking.Validators
                 .WithMessage("Last Name is required!");
 
             RuleFor(accountHolder => accountHolder.DateOfBirth)
-                .GreaterThanOrEqualTo(DateTime.Now.AddYears(-16))
+                .NotEmpty()
+                .WithMessage("Date of Birth is required!")
+                .LessThanOrEqualTo(DateTime.Now.AddYears(-16))
                 .WithMessage("Account Holder should be 16 year or older.");
 
             RuleFor(accountHolder => accountHolder.ContactNumber)
+                .Must(f => !string.IsNullOrEmpty(f))
+                .WithMessage("Contact number  is required")
                 .Matches(@"(^\d{12})")
                 .WithMessage("Only 12 digits are allowed.");
 
             RuleFor(accountHolder => accountHolder.Email)
+                .Must(f => !string.IsNullOrEmpty(f))
                 .EmailAddress()
                 .MaximumLength(20);
         }

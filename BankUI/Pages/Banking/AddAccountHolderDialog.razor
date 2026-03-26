@@ -12,25 +12,31 @@
                           Label="LastName"
                           For="@(()=> CreateAccountHolderRequest.LastName)"
                           Variant="Variant.Outlined">LastName</MudTextField>
-            <MudDatePicker @bind-Date="DateOfBirth"
+            <MudDatePicker @bind-Date="CreateAccountHolderRequest.DateOfBirth"
                            Label="Date Of Birth"
                            Editable="true"
-                           For="@(()=> DateOfBirth)"
+                           For="@(()=> CreateAccountHolderRequest.DateOfBirth)"
                            Placeholder="Select Dob"></MudDatePicker>
+
             <MudTextField @bind-Value="CreateAccountHolderRequest.ContactNumber"
                           Label="ContactNumber"
+                          For="@(() => CreateAccountHolderRequest.ContactNumber)"
                           Variant="Variant.Outlined">
                 Contact Number
             </MudTextField>
             <MudTextField @bind-Value="CreateAccountHolderRequest.Email"
                           Label="Email"
+                          For="@(()=> CreateAccountHolderRequest.Email)"
                           Variant="Variant.Outlined">
                 Email
             </MudTextField>
         </DialogContent>
         <DialogActions>
             <MudButton OnClick="Cancel">Cancel</MudButton>
-            <MudButton Color="Color.Primary" OnClick="SubmitAsync">Save</MudButton>
+            <MudButton Color="Color.Success" OnClick="SubmitAsync"
+                  Variant="Variant.Filled"
+                  Disabled="@(!_validator.Validate(CreateAccountHolderRequest).IsValid)"
+                  >Save</MudButton>
         </DialogActions>
     </MudDialog>
 </MudForm>

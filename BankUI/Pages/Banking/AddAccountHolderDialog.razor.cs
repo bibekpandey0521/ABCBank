@@ -2,7 +2,7 @@ using BankUI.Pages.Banking.Validators;
 using Common.Requests;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Runtime.CompilerServices;
+
 
 namespace BankUI.Pages.Banking
 {
@@ -16,7 +16,7 @@ namespace BankUI.Pages.Banking
 
         MudForm _form = default;
 
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         private CreateAccountHolderValidator _validator = new();
 
@@ -32,7 +32,7 @@ namespace BankUI.Pages.Banking
         private async Task SaveAsync()
         {
             // Cast
-            CreateAccountHolderRequest.DateOfBirth = (DateTime)DateOfBirth;
+           ///  CreateAccountHolderRequest.DateOfBirth = (DateTime)DateOfBirth;
 
             var response = await _accountHolderService.AddAccountHolderAsync(CreateAccountHolderRequest);
             if (response.IsSuccessful)
