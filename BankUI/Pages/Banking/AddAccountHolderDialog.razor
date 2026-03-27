@@ -4,39 +4,60 @@
             Add Account Holder
         </TitleContent>
         <DialogContent>
-            <MudTextField @bind-Value="CreateAccountHolderRequest.FirstName"
-                          Label="FirstName"
-                          For="@(()=> CreateAccountHolderRequest.FirstName)"
-                          Variant="Variant.Outlined"></MudTextField>
-            <MudTextField @bind-Value="CreateAccountHolderRequest.LastName"
-                          Label="LastName"
-                          For="@(()=> CreateAccountHolderRequest.LastName)"
-                          Variant="Variant.Outlined">LastName</MudTextField>
-            <MudDatePicker @bind-Date="CreateAccountHolderRequest.DateOfBirth"
-                           Label="Date Of Birth"
-                           Editable="true"
-                           For="@(()=> CreateAccountHolderRequest.DateOfBirth)"
-                           Placeholder="Select Dob"></MudDatePicker>
+            <MudGrid>
+                <MudItem xs="12"  sm="6" md="6">
+                    <MudTextField @bind-Value="CreateAccountHolderRequest.FirstName"
+                                  Label="FirstName"
+                                  Margin="Margin.Dense"
+                                  For="@(() => CreateAccountHolderRequest.FirstName)"
+                                  Variant="Variant.Outlined"></MudTextField>
 
-            <MudTextField @bind-Value="CreateAccountHolderRequest.ContactNumber"
-                          Label="ContactNumber"
-                          For="@(() => CreateAccountHolderRequest.ContactNumber)"
-                          Variant="Variant.Outlined">
-                Contact Number
-            </MudTextField>
-            <MudTextField @bind-Value="CreateAccountHolderRequest.Email"
-                          Label="Email"
-                          For="@(()=> CreateAccountHolderRequest.Email)"
-                          Variant="Variant.Outlined">
-                Email
-            </MudTextField>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="CreateAccountHolderRequest.LastName"
+                                  Label="LastName"
+                                  Margin="Margin.Dense"
+                                  For="@(() => CreateAccountHolderRequest.LastName)"
+                                  Variant="Variant.Outlined">LastName</MudTextField>
+                        
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudDatePicker @bind-Date="CreateAccountHolderRequest.DateOfBirth"
+                                   Label="Date Of Birth"
+                                   Editable="true"
+                                   Margin="Margin.Dense"
+                                   For="@(()=> CreateAccountHolderRequest.DateOfBirth)"
+                                   Placeholder="Select Dob"></MudDatePicker>
+                        
+                        
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="CreateAccountHolderRequest.ContactNumber"
+                                  Label="Contact No"
+                                  Margin="Margin.Dense"
+                                  For="@(() => CreateAccountHolderRequest.ContactNumber)"
+                                  Variant="Variant.Outlined">
+                        Contact Number
+                    </MudTextField>
+                        
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="CreateAccountHolderRequest.Email"
+                                  Label="Email"
+                                  Margin="Margin.Dense"
+                                  For="@(() => CreateAccountHolderRequest.Email)"
+                                  Variant="Variant.Outlined">
+                        Email
+                    </MudTextField>
+                </MudItem>
+            </MudGrid>
+
         </DialogContent>
         <DialogActions>
-            <MudButton OnClick="Cancel">Cancel</MudButton>
-            <MudButton Color="Color.Success" OnClick="SubmitAsync"
-                  Variant="Variant.Filled"
-                  Disabled="@(!_validator.Validate(CreateAccountHolderRequest).IsValid)"
-                  >Save</MudButton>
+            <MudButton OnClick="Cancel" Class="mr-auto">Cancel</MudButton>
+            <MudButton Color="Color.Success" Class="me-4" OnClick="SubmitAsync"
+                       Variant="Variant.Filled"
+                       Disabled="@(!_validator.Validate(CreateAccountHolderRequest).IsValid)">Save</MudButton>
         </DialogActions>
     </MudDialog>
 </MudForm>

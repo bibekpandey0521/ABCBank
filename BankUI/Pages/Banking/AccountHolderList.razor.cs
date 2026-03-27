@@ -39,7 +39,8 @@ namespace BankUI.Pages.Banking
             {
                 CloseButton = true,
                 MaxWidth = MaxWidth.Medium,
-                FullWidth = true,
+                FullWidth = false,
+                Position = DialogPosition.Center,
                 BackdropClick = true
             };
             var dialog = await _dialogService.ShowAsync<AddAccountHolderDialog>("Add Account Holder", parameters, options);
