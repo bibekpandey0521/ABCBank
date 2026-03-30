@@ -123,5 +123,10 @@ namespace BankUI.Pages.Banking
                 }
             }
         }
+        
+        public void ManageAccounts(int accountHolderId)
+        {
+            _navigation.NavigateTo($"/banking/manage-accounts/{accountHolderId}");
+        }
     }
 }
