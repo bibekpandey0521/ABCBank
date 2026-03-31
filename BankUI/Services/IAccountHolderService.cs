@@ -11,7 +11,7 @@ namespace BankUI.Services
 
         Task<ResponseWrapper<int>> DeleteAccountHolderAsync(int id);
 
-        Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdResponse(int id); 
+        Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdAsync(int id); 
 
         Task<ResponseWrapper<List<AccountHolderResponse>>> GetAllAccountHoldersAsync();
     }

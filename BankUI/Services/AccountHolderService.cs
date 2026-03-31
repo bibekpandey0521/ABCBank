@@ -27,7 +27,7 @@ namespace BankUI.Services
             return await response.ToResponse<int>();
         }
 
-        public async Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdResponse(int id)
+        public async Task<ResponseWrapper<AccountHolderResponse>> GetAccountHolderByIdAsync(int id)
         {
             var response = await _httpClient.GetAsync(AccountHoldersEndpoints.GetById(id));
             return await response.ToResponse<AccountHolderResponse>();
