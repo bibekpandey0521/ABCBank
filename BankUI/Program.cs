@@ -19,6 +19,7 @@ namespace BankUI
 
             builder.Services.AddMudServices();
             builder.Services.AddScoped<IAccountHolderService, AccountHolderService>();
+            builder.Services.AddScoped<IAccountService,AccountService>();
 
             await builder.Build().RunAsync();
         }

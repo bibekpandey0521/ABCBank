@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Program.cs~RF3da30b5d.TMP" />
     <None Remove="Services\AccountHolderService.cs~RF1f3e52ec.TMP" />
   </ItemGroup>
 
