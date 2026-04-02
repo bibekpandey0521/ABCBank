@@ -8,11 +8,11 @@ namespace BankUI.Services
     {
         Task<ResponseWrapper<int>> AddAccountAsync(CreateAccountRequest createAccount);
         Task<ResponseWrapper<int>> TransactionAccountAsync(TransactionRequest transaction);
-
         Task<ResponseWrapper<AccountResponse>> GetAccountByIdAsync(int id);
         Task<ResponseWrapper<AccountResponse>> GetAccountByAccountNumberAsync(string accountNumber);
         Task<ResponseWrapper<List<TransactionResponse>>> GetAccountTransactionsAsync(int accountId);
-
         Task<ResponseWrapper<List<AccountResponse>>> GetAllAccountsAsync();
+
+        Task<ResponseWrapper<List<AccountResponse>>> GetAccountsByAccountHolderIdAsync(int accountHolderId);
     }
 }

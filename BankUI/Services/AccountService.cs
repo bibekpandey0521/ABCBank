@@ -4,6 +4,7 @@ using Common.Requests;
 using Common.Responses;
 using Common.Wrapper;
 using System.Net.Http.Json;
+using System.Runtime.InteropServices;
 
 namespace BankUI.Services
 {
@@ -30,6 +31,12 @@ namespace BankUI.Services
         {
             var response = await _httpClient.GetAsync(AccountsEndpoints.GetById(id));
             return await response.ToResponse<AccountResponse>();
+        }
+
+        public async Task<ResponseWrapper<List<AccountResponse>>> GetAccountsByAccountHolderIdAsync(int accountHolderId)
+        {
+            var response = await _httpClient.GetAsync(AccountsEndpoints.GetAccountsByAccountHolderId(accountHolderId));
+            return await response.ToResponse<List<AccountResponse>>();
         }
 
         public async Task<ResponseWrapper<List<TransactionResponse>>> GetAccountTransactionsAsync(int accountId)
