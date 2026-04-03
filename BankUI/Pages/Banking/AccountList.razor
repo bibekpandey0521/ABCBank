@@ -1,3 +1,40 @@
-﻿<h3>AccountList</h3>
-
-
+﻿<Header OnClose="PageClosed" Title="BankAccounts" Description="Account Holder's Bank Accounts."/>
+@if (_loading)
+{
+    <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate=true />
+}
+else
+{
+    <MudCard Elevation="25">
+        <MudCardContent>
+            <MudTable Items="Accounts" Elevation="25" Dense="true" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+                <ToolBarContent>
+                    <MudFab Color="Color.Primary"
+                            StartIcon="@Icons.Material.Filled.Add"
+                            Size="Size.Small"
+                            OnClick="(()=> AddAccountAsync())"/>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>AccountNumber</MudTh>
+                    <MudTh>Balance</MudTh>
+                    <MudTh>IsActive</MudTh>
+                    <MudTh>Account Type</MudTh>
+                    <MudTh>Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="AccountNumber">@context.AccountNumber</MudTd>
+                    <MudTd DataLabel="Balance">@context.Balance</MudTd>
+                    <MudTd DataLabel="Account Type">@context.IsActive</MudTd>
+                    <MudTd DataLabel="ContactNo">@context.Type.ToString()</MudTd>
+                    <MudTd DataLabel="Actions">
+                        <MudMenu Label="Manage" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary">
+                            <MudMenuItem>Update</MudMenuItem>
+                            <MudMenuItem>Accounts</MudMenuItem>
+                            <MudMenuItem>Delete</MudMenuItem>
+                        </MudMenu>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudCardContent>
+    </MudCard>
+}

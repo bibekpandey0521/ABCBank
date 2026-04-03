@@ -26,5 +26,14 @@ namespace BankUI.Pages.Banking
             }
             _loading = false;
         }
+        private void PageClosed()
+        {
+            _navigation.NavigateTo("/banking/account-holder-list");
+        }
+
+        private  async Task AddAccountAsync()
+        {
+
+        }
     }
 }
