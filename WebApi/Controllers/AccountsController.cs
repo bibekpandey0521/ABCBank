@@ -2,6 +2,7 @@
 using Application.Features.Accounts.Commands;
 using Application.Features.Accounts.Queries;
 using Common.Requests;
+using Domain;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -81,7 +82,7 @@ namespace WebApi.Controllers
             return NotFound(response);
         }
 
-        [HttpGet("by-account-holder/{accountHolderId}")]
+        [HttpGet("by-account-holder-id/{accountHolderId}")]
         public async Task<IActionResult> GetAccountsByAccountHolderIdAsync(int accountHolderId)
         {
             var response = await Sender.Send(new GetAccountsByAccountHolderId { AccountHolderId = accountHolderId } );

@@ -1,5 +1,6 @@
 using Common.Responses;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace BankUI.Pages.Banking
 {
@@ -11,6 +12,10 @@ namespace BankUI.Pages.Banking
         private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
+        {
+            await LoadAccounts();
+        }
+        private async Task LoadAccounts()
         {
             var response = await _accountService.GetAccountsByAccountHolderIdAsync(AccountHolderId);
             if (response.IsSuccessful)
@@ -31,9 +36,29 @@ namespace BankUI.Pages.Banking
             _navigation.NavigateTo("/banking/account-holder-list");
         }
 
-        private  async Task AddAccountAsync()
+        private async Task AddAccountAsync()
         {
+            var parameters = new DialogParameters
+            {
+                {nameof(AddAccountDialog.AccountHolderId),AccountHolderId}
+            };
+            var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true,
+                BackdropClick = true
+            };
 
+            var dialog = await _dialogService.ShowAsync<AddAccountDialog>("Open Bank Account", parameters,options);
+
+            var result = await   dialog.Result;
+
+            if (!result.Canceled)
+            {
+                // Reload accounts after successful creation
+                await LoadAccounts();
+            }
         }
     }
 }

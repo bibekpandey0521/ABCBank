@@ -30,9 +30,9 @@ namespace Application.Features.Accounts.Queries
                 .ToList();
             if(accounts.Count > 0)
             {
-                return new ResponseWrapper<List<AccountResponse>>().Success(data: accounts.Adapt<List<AccountResponse>>());
+                return await Task.FromResult(new ResponseWrapper<List<AccountResponse>>().Success(data: accounts.Adapt<List<AccountResponse>>()));
             }
-            return new ResponseWrapper<List<AccountResponse>>().Failed(message:"No Accounts Were Found.");
+            return await Task.FromResult(new ResponseWrapper<List<AccountResponse>>().Failed(message:"No Accounts Were Found."));
         }
     }
 }

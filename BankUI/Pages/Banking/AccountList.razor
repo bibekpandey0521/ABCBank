@@ -19,14 +19,17 @@ else
                     <MudTh>Balance</MudTh>
                     <MudTh>IsActive</MudTh>
                     <MudTh>Account Type</MudTh>
-                    <MudTh>Actions</MudTh>
+                    <MudTh Style="text-align:right">Actions</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="AccountNumber">@context.AccountNumber</MudTd>
-                    <MudTd DataLabel="Balance">@context.Balance</MudTd>
-                    <MudTd DataLabel="Account Type">@context.IsActive</MudTd>
+                    <MudTd DataLabel="Balance">
+                        @context.Balance.ToString("C",new System.Globalization.CultureInfo("ne-NP"))</MudTd>
+                    <MudTd DataLabel="Account Type">
+                        <MudCheckBox T="bool" @bind-Value="@context.IsActive"  ReadOnly="true" Color="Color.Secondary"></MudCheckBox>    
+                    </MudTd>
                     <MudTd DataLabel="ContactNo">@context.Type.ToString()</MudTd>
-                    <MudTd DataLabel="Actions">
+                    <MudTd DataLabel="Actions" Style="text-align:right">
                         <MudMenu Label="Manage" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary">
                             <MudMenuItem>Update</MudMenuItem>
                             <MudMenuItem>Accounts</MudMenuItem>
