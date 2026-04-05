@@ -1,6 +1,9 @@
+using Common.Requests;
 using Common.Responses;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using System.Formats.Asn1;
+using System.Reflection;
 
 namespace BankUI.Pages.Banking
 {
@@ -57,6 +60,31 @@ namespace BankUI.Pages.Banking
             if (!result.Canceled)
             {
                 // Reload accounts after successful creation
+                await LoadAccounts();
+            }
+        }
+
+        private async Task TransactAsync(int accountId, decimal balance)
+        {
+            
+            var parameters = new DialogParameters
+            {
+                { nameof(TransactDialog.AccountId), accountId },
+                { nameof(TransactDialog.Balance), balance }
+            };
+
+            var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                FullWidth = true,
+                BackdropClick = true
+            };
+
+            var dialog = await _dialogService.ShowAsync<TransactDialog>("Account Transaction", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Canceled)
+            {
                 await LoadAccounts();
             }
         }

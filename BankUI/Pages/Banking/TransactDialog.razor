@@ -1,26 +1,36 @@
 ﻿@using Common.Enums;
-<MudForm @ref="@_form" Model="CreateAccountRequest">
+<MudForm @ref="@_form" Model="TransactionRequest">
     <MudDialog>
         <TitleContent>
-            Open Bank Account
+            Account Transaction
         </TitleContent>
         <DialogContent>
             <MudGrid>
-                <MudItem xs="12" sm="6" md="6">
-                    <MudNumericField @bind-Value="CreateAccountRequest.Balance"
-                                     Label="Opening Balance"
+                <MudItem xs="12" sm="12" md="12">
+                    <MudNumericField @bind-Value="Balance"
+                                     Label="Curent Balance"
                                      Margin="Margin.Dense"
-                                     Adornment="Adornment.Start" 
+                                     Adornment="Adornment.Start"
+                                     AdornmentText="R"
+                                     AdormentColor="Color.Info"
+                                     ReadOnly="true"
+                                     Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudNumericField @bind-Value="TransactionRequest.Amount"
+                                     Label="Transaction Amount"
+                                     Margin="Margin.Dense"
+                                     Adornment="Adornment.Start"
                                      AdornmentText="R"
                                      AdormentColor="Color.Info"
                                      Variant="Variant.Outlined" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="6">
-                    <MudSelect @bind-Value="CreateAccountRequest.Type"
-                               Label="Account.Type"
+                    <MudSelect @bind-Value="TransactionRequest.Type"
+                               Label="Transaction Type"
                                Margin="Margin.Dense"
                                Variant="Variant.Outlined">
-                        @foreach(Common.Enums.AccountType type in Enum.GetValues(typeof(AccountType)))
+                        @foreach (TransactionType type in Enum.GetValues(typeof(TransactionType)))
                         {
                             <MudSelectItem Value="@(type)">@type</MudSelectItem>
                         }

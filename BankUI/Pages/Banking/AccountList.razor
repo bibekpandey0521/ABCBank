@@ -26,14 +26,13 @@ else
                     <MudTd DataLabel="Balance">
                         @context.Balance.ToString("C",new System.Globalization.CultureInfo("ne-NP"))</MudTd>
                     <MudTd DataLabel="Account Type">
-                        <MudCheckBox T="bool" @bind-Value="@context.IsActive"  ReadOnly="true" Color="Color.Secondary"></MudCheckBox>    
+                        <MudCheckBox  @bind-Value="@context.IsActive"  ReadOnly="true" Color="Color.Primary"></MudCheckBox>    
                     </MudTd>
                     <MudTd DataLabel="ContactNo">@context.Type.ToString()</MudTd>
                     <MudTd DataLabel="Actions" Style="text-align:right">
                         <MudMenu Label="Manage" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary">
-                            <MudMenuItem>Update</MudMenuItem>
-                            <MudMenuItem>Accounts</MudMenuItem>
-                            <MudMenuItem>Delete</MudMenuItem>
+                            <MudMenuItem OnClick="(() => TransactAsync(context.Id, context.Balance))">Transact</MudMenuItem>
+                            <MudMenuItem>History</MudMenuItem>
                         </MudMenu>
                     </MudTd>
                 </RowTemplate>

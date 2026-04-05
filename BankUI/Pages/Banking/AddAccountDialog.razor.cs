@@ -18,7 +18,7 @@ namespace BankUI.Pages.Banking
         private async Task SubmitAsync()
         {
             await _form.ValidateAsync();
-            if (!_form.IsValid)
+            if (_form.IsValid)
             {
                 // SaveAsync
                 await SaveAsync();
