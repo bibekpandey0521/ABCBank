@@ -1,3 +1,4 @@
+using BankUI.Pages.Banking.Validators;
 using Common.Requests;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -14,6 +15,14 @@ namespace BankUI.Pages.Banking
         public TransactionRequest TransactionRequest { get; set; } = new();
 
         MudForm _form = default!;
+
+
+        private TransactionValidator _validator = new();
+
+        protected override void OnInitialized()
+        {
+            TransactionRequest.CurrentBalance = Balance;
+        }
 
         private async Task SubmitAsync()
         {
