@@ -1,0 +1,48 @@
+﻿@page "/banking/account-history/{AccountId:int}"
+
+<Header OnClose="PageClosed" Title="Account Transaction" Description="List Of Account Transactions." />
+
+@if (_loading)
+{
+    <MudProgressCircular Size="Size.Large" Color="Color.Info" Indeterminate="true" />
+}
+
+else
+{
+    <MudExpansionPanel DisableGutter="false"
+                       Style="padding:10px!important;margin-bottom:10px!important;border-radius:var(--mud-default-borderradius) !important;"
+                       Class="mud-elevation-25" Text="Account Details">
+        <MudGrid Class="py-2">
+            <MudItem xs="12" sm="6" md="6">
+                <MudTextField Label="Account Number" @bind-Value="Account.AccountNumber" ReadOnly="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="6">
+                <MudTextField Label="Current Balance" @bind-Value="Account.Balance" ReadOnly="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="6">
+                <MudTextField Label="Account Type" @bind-Value="Account.Type" ReadOnly="true" />
+            </MudItem>
+        </MudGrid>
+    </MudExpansionPanel>
+    <MudTabs Elevation="25" Rounded="true" Outlined="false" Color="@Color.Transparent" PanelClass="mt-5">
+        <MudTabPanel Text="Transactions">
+            <MudCard Elevation="25">
+                <MudCardContent>
+                    <MudTable Items="Transactions" Elevation="25" Dense="true" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+                        <HeaderContent>
+                            <MudTh>Account Type</MudTh>
+                            <MudTh>Amount</MudTh>
+                            <MudTh>Date</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="AccountType">@context.Type</MudTd>
+                            <MudTd DataLabel="Amount">@context.Amount.ToString("C", new System.Globalization.CultureInfo("ne-NP"))</MudTd>
+                            <MudTd DataLabel="Date">@context.Date.ToString("dd/mm/yyyy")</MudTd>
+                        </RowTemplate>
+                    </MudTable>
+                </MudCardContent>
+            </MudCard>
+        </MudTabPanel>
+    </MudTabs>
+
+}

@@ -88,5 +88,10 @@ namespace BankUI.Pages.Banking
                 await LoadAccounts();
             }
         }
+
+        private void History(int accountId)
+        {
+            _navigation.NavigateTo($"/banking/account-history/{accountId}");
+        }
     }
 }

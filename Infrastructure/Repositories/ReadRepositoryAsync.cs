@@ -15,7 +15,6 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public IQueryable<T> Entities => _context.Set<T>();
 
         public async Task<List<T>> GetAllAsync()
         {
@@ -26,5 +25,6 @@ namespace Infrastructure.Repositories
         {
             return await _context.Set<T>().FindAsync(id);
         }
+        public IQueryable<T> Entities => _context.Set<T>();
     }
 }
